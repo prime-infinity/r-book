@@ -15,7 +15,7 @@ source("chapters/chapter5-4.R")
 source("chapters/chapter5-5.R")
 source("chapters/chapter6-1.R")
 source("chapters/chapter6-2.R")
-source("chapters/chapter3.R")
+#source("chapters/chapter3.R")
 
 # Define the UI for the Shiny app
 ui <- dashboardPage(
@@ -40,8 +40,8 @@ ui <- dashboardPage(
       menuItem("Results", tabName = "Results",
                menuSubItem("Model Output", tabName = "model-output"),
                menuSubItem("Evaluation Model Performance", tabName = "model-performance")
-      ),
-      menuItem("Chapter 3", tabName = "chapter3")
+      )
+      #menuItem("Chapter 3", tabName = "chapter3")
       # Add more menu items as needed
       
     )
@@ -69,12 +69,12 @@ ui <- dashboardPage(
       
       # Chapter 5
       tabItem(tabName = "model-output", chapter6_1_ui),
-      tabItem(tabName = "model-performance", chapter6_2_ui),
+      tabItem(tabName = "model-performance", chapter6_2_ui)
       
       
       
       # Chapter 3
-      tabItem(tabName = "chapter3", chapter3_ui)
+      #tabItem(tabName = "chapter3", chapter3_ui)
       
       # Add more tabItems as needed
     )
@@ -87,7 +87,7 @@ server <- function(input, output, session) {
   #chapter1_server(input, output, session)
   
   
-  chapter3_server(input, output, session)
+  #chapter3_server(input, output, session)
   # Add more server logic as needed
 }
 
