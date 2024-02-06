@@ -1,6 +1,8 @@
 library(dplyr)
 library(shiny)
 library(shinydashboard)
+library(RefManageR)
+
 
 
 # Load chapter files
