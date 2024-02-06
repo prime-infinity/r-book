@@ -2,7 +2,7 @@
 
 chapter5_1_ui <- box(
   
-  title = "Chapter 4 Methods",
+  title = "3. Methods",
   
   p(
     "This paper describes a methodology for systematically monitoring the use of UNHCR microdata. We develop a workflow for searching literature repositories with an initial focus on academic research, but with plans to include 'grey literature' in the future. We take a three-step approach to producing a comprehensive and informative list of the papers that reference a particular dataset."
@@ -59,7 +59,7 @@ chapter5_1_ui <- box(
   ),
   
   
-  h3("Tools"),
+  h3("3.1.Tools"),
   p(
     "We use two external tools: APIs powered by Semantic Scholar and NLP4Dev. We load corpuses from both and store them in",
     a(href = "https://console.cloud.google.com/storage/browser/mdl-explorer-app;tab=objects?project=unhcr-microdata&prefix=&forceOnObjectsSortingFiltering=false", "Google Cloud Storage"),

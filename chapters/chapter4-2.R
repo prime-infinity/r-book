@@ -7,17 +7,16 @@ chapter4_2_ui <- box(
   tags$ul(
     tags$li("Network of citing authors"),
     tags$li("Network of citing disciplines"),
-    tags$li(
-      div(
-        class = "note",
-        "Citing disciplines depend on categories defined by external institutions."
-      )
-    )
   ),
 
+  # Additional note
+  div(
+    class = "note",
+    "Citing disciplines depend on categories defined by external institutions."
+  ),
 
   # Stakeholder benefits
-  h3("We hope that this approach will provide value to multiple stakeholders, such as:"),
+  h5("We hope that this approach will provide value to multiple stakeholders, such as:"),
   HTML(
     '<table class="table">
       <thead>
@@ -42,6 +41,17 @@ chapter4_2_ui <- box(
       </tbody>
     </table>'
   ),
+  
+  # Custom styles for the note
+  tags$style(HTML("
+    .note {
+      background-color: #f0f8ff; /* Light blue background */
+      border-left: 5px solid #007BFF; /* Blue left border */
+      padding: 10px; /* Padding for content */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+    }
+  ")),
+  
   
   width = 12
 )

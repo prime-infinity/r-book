@@ -2,7 +2,7 @@
 
 chapter5_2_ui <- box(
   
-  h3("Citations"),
+  h3("3.2 Citations"),
   p("The following papers informed our approach:"),
   
   width=12

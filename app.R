@@ -24,13 +24,13 @@ ui <- dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Introduction", tabName = "Introduction"),
-      menuItem("Context", tabName = "Context"),
+      menuItem("1.Context", tabName = "Context"),
       
-      menuItem("Proposed-Solution", tabName = "Proposed-Solution",
-               menuSubItem("Dataset-level outputs", tabName = "Dataset-level"),
-               menuSubItem("Library-level outputs", tabName = "Library-level")
+      menuItem("2.Proposed-Solution", tabName = "Proposed-Solution",
+               menuSubItem("2.1 Dataset-level outputs", tabName = "Dataset-level"),
+               menuSubItem("2.2 Library-level outputs", tabName = "Library-level")
       ),
-      menuItem("Methods", tabName = "Methods",
+      menuItem("3. Methods", tabName = "Methods",
                menuSubItem("Tools", tabName = "tools"),
                menuSubItem("Citations", tabName = "citations"),
                menuSubItem("Query Generation", tabName = "query-generation"),
