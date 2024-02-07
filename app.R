@@ -18,6 +18,7 @@ source("chapters/chapter5-5.R")
 source("chapters/chapter5-6.R")
 source("chapters/chapter6-1.R")
 source("chapters/chapter6-2.R")
+source("chapters/chapter7.R")
 source("chapters/chapter3.R")
 
 # Define the UI for the Shiny app
@@ -45,6 +46,8 @@ ui <- dashboardPage(
                menuSubItem("4.3. Model Output", tabName = "model-output"),
                menuSubItem("4.4. Evaluation Model Performance", tabName = "model-performance")
       ),
+      
+      menuItem("5.Implementation Options", tabName = "implementation-options"),
       menuItem("Chapter 3", tabName = "chapter3")
       # Add more menu items as needed
       
@@ -76,7 +79,8 @@ ui <- dashboardPage(
       tabItem(tabName = "model-output", chapter6_1_ui),
       tabItem(tabName = "model-performance", chapter6_2_ui),
       
-      
+      # Chapter 5
+      tabItem(tabName = "implementation-options", chapter7_ui),
       
       # Chapter 3
       tabItem(tabName = "chapter3", chapter3_ui)
