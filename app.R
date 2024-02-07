@@ -33,10 +33,10 @@ ui <- dashboardPage(
                menuSubItem("2.2 Library-level outputs", tabName = "Library-level")
       ),
       menuItem("3. Methods", tabName = "Methods",
-               menuSubItem("Tools", tabName = "tools"),
-               menuSubItem("Citations", tabName = "citations"),
-               menuSubItem("Query Generation", tabName = "query-generation"),
-               menuSubItem("Semantic Search", tabName = "semantic-search"),
+               menuSubItem("3.1 Tools", tabName = "tools"),
+               menuSubItem("3.2 Citations", tabName = "citations"),
+               menuSubItem("3.3 Query Generation", tabName = "query-generation"),
+               menuSubItem("3.4 Semantic Search", tabName = "semantic-search"),
                menuSubItem("Network Analysis", tabName = "network-analysis")
       ),
       menuItem("Results", tabName = "Results",
