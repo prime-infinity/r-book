@@ -17,10 +17,15 @@ chapter5_2_ui <- box(
                # Extract information from the bibliography entry
                citation_info <- bib[[cite_key]]
                
+               # Format the authors
+               authors <- sapply(citation_info$author, function(author) {
+                 paste(author$given, author$family, collapse = " ")
+               })
+               
                # Format the information for display
                formatted_info <- paste(
                  "Title:", citation_info$title, "<br>",
-                 "Authors:", paste(citation_info$author[[1]]$given, citation_info$author[[1]]$family, collapse = ", "), "<br>",
+                 "Authors:", paste(authors, collapse = ", "), "<br>",
                  "Book Title:", citation_info$booktitle, "<br>",
                  "Year:", citation_info$year, "<br>",
                  if (!is.null(citation_info$url)) paste("URL:", citation_info$url, "<br>", sep = ""),
