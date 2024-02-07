@@ -19,6 +19,7 @@ source("chapters/chapter5-6.R")
 source("chapters/chapter6-1.R")
 source("chapters/chapter6-2.R")
 source("chapters/chapter7.R")
+source("chapters/chapter8.R")
 source("chapters/chapter3.R")
 
 # Define the UI for the Shiny app
@@ -48,6 +49,9 @@ ui <- dashboardPage(
       ),
       
       menuItem("5.Implementation Options", tabName = "implementation-options"),
+      
+      menuItem("6.Case Study: VaSyR 2018", tabName = "case-study"),
+      
       menuItem("Chapter 3", tabName = "chapter3")
       # Add more menu items as needed
       
@@ -81,6 +85,9 @@ ui <- dashboardPage(
       
       # Chapter 5
       tabItem(tabName = "implementation-options", chapter7_ui),
+      
+      #chapter 6
+      tabItem(tabName = "case-study", chapter8_ui),
       
       # Chapter 3
       tabItem(tabName = "chapter3", chapter3_ui)
