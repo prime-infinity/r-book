@@ -33,7 +33,7 @@ ui <- dashboardPage(
                menuSubItem("2.1 Dataset-level outputs", tabName = "Dataset-level"),
                menuSubItem("2.2 Library-level outputs", tabName = "Library-level")
       ),
-      menuItem("3. Methods", tabName = "Methods",
+      menuItem("3.Methods", tabName = "Methods",
                menuSubItem("3.1 Tools", tabName = "tools"),
                menuSubItem("3.2 Citations", tabName = "citations"),
                menuSubItem("3.3 Query Generation", tabName = "query-generation"),
@@ -41,9 +41,9 @@ ui <- dashboardPage(
                menuSubItem("3.5 Topic Modeling and Sentiment Analysis", tabName = "topic-modeling"),
                menuSubItem("3.6 Network Analysis", tabName = "network-analysis")
       ),
-      menuItem("Results", tabName = "Results",
-               menuSubItem("Model Output", tabName = "model-output"),
-               menuSubItem("Evaluation Model Performance", tabName = "model-performance")
+      menuItem("4.Results", tabName = "Results",
+               menuSubItem("4.3. Model Output", tabName = "model-output"),
+               menuSubItem("4.4. Evaluation Model Performance", tabName = "model-performance")
       ),
       menuItem("Chapter 3", tabName = "chapter3")
       # Add more menu items as needed

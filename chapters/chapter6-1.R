@@ -1,17 +1,22 @@
-# chapters/chapter6.R
 
 chapter6_1_ui <- box(
   
-  title = "Chapter 5 Results",
+  title = "4 Results",
   
   p("In this section we describe the output of the pipeline that was developed in the Methods section. This section has two components:
   "),
   
-  h3("Model Output"),
+  h3("4.1. Model Output"),
   
   p("We refer to each combination of query selection, results retrieval, and relevance scoring method, as a 'model'. The output of each model is therefore the list of results returned.
   "),
 
+  h3("4.2. Evaluating Model performance"),
+  
+  p("Because each model has unique inputs and outputs, we can evaluate each model on some relevant performance metric. Our main aim is to evaluate how effective each model is at returning the highest number of “potentially relevant results that are subsequently confirmed to be truly relevant."),
+  
+  h3("4.3. Model Output"),
+  
   p(
     "Each model returns a list of papers with the following information:"
   ),

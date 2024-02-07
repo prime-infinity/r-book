@@ -3,7 +3,7 @@
 chapter6_2_ui <- box(
   
   
-  h3("Evaluating Model performance"),
+  h3("4.4. Evaluating Model performance"),
   
   p("Because each model has unique inputs and outputs, we can evaluate each model on some relevant performance metric. Our main aim is to evaluate how effective each model is at returning the highest number of potentially relevant results that are subsequently confirmed to be truly relevant.
   "),
