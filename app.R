@@ -15,6 +15,7 @@ source("chapters/chapter5-2.R")
 source("chapters/chapter5-3.R")
 source("chapters/chapter5-4.R")
 source("chapters/chapter5-5.R")
+source("chapters/chapter5-6.R")
 source("chapters/chapter6-1.R")
 source("chapters/chapter6-2.R")
 source("chapters/chapter3.R")
@@ -37,7 +38,8 @@ ui <- dashboardPage(
                menuSubItem("3.2 Citations", tabName = "citations"),
                menuSubItem("3.3 Query Generation", tabName = "query-generation"),
                menuSubItem("3.4 Semantic Search", tabName = "semantic-search"),
-               menuSubItem("Network Analysis", tabName = "network-analysis")
+               menuSubItem("3.5 Topic Modeling and Sentiment Analysis", tabName = "topic-modeling"),
+               menuSubItem("3.6 Network Analysis", tabName = "network-analysis")
       ),
       menuItem("Results", tabName = "Results",
                menuSubItem("Model Output", tabName = "model-output"),
@@ -66,7 +68,8 @@ ui <- dashboardPage(
       tabItem(tabName = "citations", chapter5_2_ui),
       tabItem(tabName = "query-generation", chapter5_3_ui),
       tabItem(tabName = "semantic-search", chapter5_4_ui),
-      tabItem(tabName = "network-analysis", chapter5_5_ui),
+      tabItem(tabName = "topic-modeling", chapter5_5_ui),
+      tabItem(tabName = "network-analysis", chapter5_6_ui),
       
       
       # Chapter 5
