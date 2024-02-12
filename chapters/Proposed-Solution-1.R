@@ -1,4 +1,3 @@
-# chapters/chapter4.R
 
 chapter4_1_ui <- box(
   title = "Chapter 2 Proposed Solution",

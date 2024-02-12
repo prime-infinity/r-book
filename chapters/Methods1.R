@@ -1,5 +1,3 @@
-# chapters/chapter5.R
-
 chapter5_1_ui <- box(
   
   title = "3. Methods",

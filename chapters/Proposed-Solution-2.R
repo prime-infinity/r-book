@@ -1,4 +1,3 @@
-# chapters/chapter4.R
 
 chapter4_2_ui <- box(
 
