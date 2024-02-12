@@ -1,0 +1,100 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Query Generation
+
+Below are the query components that were generated for dataset params$selected dataset.
+
+```{r echo=FALSE}
+###THIS CHUNK SHOULD PRINT THE LIST OF QUERIES (THEIR ACTUAL TEXT)
+```
+
+## Semantic Search
+Each of the six queries returned X potentially relevant papers.
+
+```{r echo=FALSE}
+
+query_count_table <- data.frame(query_type = c(1:6), query_count = NA)
+
+for (i in 1:6){
+  results <- read.csv(paste0("data/dataset189_query",i,".csv")) #change this to the correct path. I don't see where in this repo the files are stored
+  query_count <- nrow(results)
+  
+  query_count_table$query_count[query_count_table$query_type == i] <- query_count
+   
+}
+
+table <- kableExtra::kbl(
+    x = query_count_table,
+    valign = "t",
+    caption.short = "Number of search results per query"
+, full_width = F)
+cat(table)
+ 
+```
+
+## Topic Modeling
+
+Out of the XX papers returned across the six query types, YYY had abstracts available in either the NLP4Dev or Semantic Scholar corpuses, and ZZZ had full body text available.
+
+These were used as inputs to the NLP4Dev API, as described in Section 3.5.
+
+XXX were defined as relevant.
+
+```{r echo=FALSE}
+relevance_summary_table <- data.frame(query_type = c(1:6), total_result_count = NA, full_text_available = NA, abstract_only = NA, relevant = NA)
+# Calculate the figures for full text and abstract, and use them to populate the table
+
+table <- kableExtra::kbl(
+    x = relevance_summary_table,
+    valign = "t",
+    caption.short = "Summary of results per query"
+, full_width = F)
+cat(table)
+```
+
+
+## Model Output
+
+Following manual review of the papers identified automatically, XXX were confirmed as relevant. Of these XXX, YYY had previously been identified through the manual procedure, and ZZZ were new.
+
+This represents a XXX percent improvement over the baseline.
+```{r echo=FALSE}
+## UPDATE THIS SECTION AFTER THE PREVIOUS SECTION IS COMPLETE
+# relevant_result_breakdown <- ggplot(relevance_summary_table)
+# Calculate the figures for full text and abstract, and use them to populate the table
+
+# plot(relevant_result_breakdown)
+```
+
+
+## Evaluating Model Performance
+
+Based on our selected evaluation metric, Query X performed most effectively.
+
+```{r echo=FALSE}
+top_query <- relevance_summary_table$query_type[which.max(relevance_summary_table$relevant)] 
+# Calculate the figures for full text and abstract, and use them to populate the table
+
+table <- kableExtra::kbl(
+    x = top_query,
+    valign = "t",
+    caption.short = "Summary of results per query"
+, full_width = F)
+cat(table)
+```
+
+## Network
+
+Below is the distribution of fields and geographic locations from the papers that referenced this dataset.
+
+```{r echo=FALSE}
+selectInput("query_type", label = "Select a query type:",
+              choices = c(1:6), selected = 1)
+
+renderPlot({
+  coverage_heat_map(params$selected_dataset,params$selected_query_type)
+})
+```

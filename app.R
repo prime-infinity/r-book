@@ -8,20 +8,7 @@ library(RefManageR)
 
 
 # Load chapter files
-source("chapters/Introduction.R")
-source("chapters/Context.R")
-source("chapters/Proposed-Solution-1.R")
-source("chapters/Proposed-Solution-2.R")
-source("chapters/Methods1.R")
-source("chapters/Methods2.R")
-source("chapters/Methods3.R")
-source("chapters/Methods4.R")
-source("chapters/Methods5.R")
-source("chapters/Methods6.R")
-source("chapters/Results1.R")
-source("chapters/Results2.R")
-source("chapters/Implementation-options.R")
-source("chapters/Case-study.R")
+
 source("chapters/Contributors.R")
 source("chapters/Bibliography.R")
 source("chapters/chapter3.R")
@@ -36,21 +23,21 @@ ui <- dashboardPage(
       menuItem("Introduction", tabName = "Introduction"),
       menuItem("1.Context", tabName = "Context"),
       
-      menuItem("2.Proposed-Solution", tabName = "Proposed-Solution",
-               menuSubItem("2.1 Dataset-level outputs", tabName = "Dataset-level"),
-               menuSubItem("2.2 Library-level outputs", tabName = "Library-level")
+      menuItem("2.Proposed-Solution", tabName = "Proposed-Solution"),
+      
+      menuItem("3.Methods", tabName = "Methods"),
+      
+      menuItem("...", tabName = "Methods2",
+               menuSubItem("3.1 Query Generation", tabName = "query-generation"),
+               menuSubItem("3.2 Semantic Search", tabName = "semantic-search"),
+               menuSubItem("3.3 Topic Modeling", tabName = "topic-modeling"),
+               menuSubItem("3.4 Network Analysis", tabName = "network-analysis")
       ),
-      menuItem("3.Methods", tabName = "Methods",
-               menuSubItem("3.1 Tools", tabName = "tools"),
-               menuSubItem("3.2 Citations", tabName = "citations"),
-               menuSubItem("3.3 Query Generation", tabName = "query-generation"),
-               menuSubItem("3.4 Semantic Search", tabName = "semantic-search"),
-               menuSubItem("3.5 Topic Modeling and Sentiment Analysis", tabName = "topic-modeling"),
-               menuSubItem("3.6 Network Analysis", tabName = "network-analysis")
-      ),
-      menuItem("4.Results", tabName = "Results",
-               menuSubItem("4.3. Model Output", tabName = "model-output"),
-               menuSubItem("4.4. Evaluation Model Performance", tabName = "model-performance")
+      menuItem("4.Results", tabName = "Results"),
+      
+      menuItem("...", tabName = "Results2",
+               menuSubItem("4.1. Model Output", tabName = "model-output"),
+               menuSubItem("4.2. Evaluation Model Performance", tabName = "model-performance")
       ),
       
       menuItem("5.Implementation Options", tabName = "implementation-options"),
@@ -69,45 +56,39 @@ ui <- dashboardPage(
   
   dashboardBody(
     tabItems(
-      # Chapter 1
-      tabItem(tabName = "Introduction", chapter1_ui),
       
-      # Chapter 2
-      tabItem(tabName = "Context", chapter2_ui),
-        
-      # Chapter 3
-      tabItem(tabName = "Dataset-level",chapter4_1_ui),
-      tabItem(tabName = "Library-level",chapter4_2_ui),
+      tabItem(tabName = "Introduction", uiOutput("introTab")),
+  
+      tabItem(tabName = "Context", uiOutput("contextTab")),
       
-      # Chapter 4
-      tabItem(tabName = "tools", chapter5_1_ui),
-      tabItem(tabName = "citations", chapter5_2_ui),
-      tabItem(tabName = "query-generation", chapter5_3_ui),
-      tabItem(tabName = "semantic-search", chapter5_4_ui),
-      tabItem(tabName = "topic-modeling", chapter5_5_ui),
-      tabItem(tabName = "network-analysis", chapter5_6_ui),
+      tabItem(tabName = "Proposed-Solution",uiOutput("proposedsolutionTab")),  
+      
+      tabItem(tabName = "Methods",uiOutput("MethodsTab")),
+        tabItem(tabName = "query-generation",uiOutput("querygenerationTab")),
+        tabItem(tabName = "semantic-search",uiOutput("semanticsearchTab")),
+        tabItem(tabName = "topic-modeling",uiOutput("topicmodelingTab")),
+        tabItem(tabName = "network-analysis",uiOutput("networkanalysisTab")),
+
+      tabItem(tabName = "Results",uiOutput("ResultsTab")),
+        tabItem(tabName = "model-output",uiOutput("modeloutputTab")),
+        tabItem(tabName = "model-performance",uiOutput("modelperformanceTab")),
+    
+     
+      tabItem(tabName = "implementation-options", uiOutput("implementationoptionsTab")),
       
       
-      # Chapter 5
-      tabItem(tabName = "model-output", chapter6_1_ui),
-      tabItem(tabName = "model-performance", chapter6_2_ui),
+      tabItem(tabName = "case-study", uiOutput("casestudyTab")),
       
-      # Chapter 5
-      tabItem(tabName = "implementation-options", chapter7_ui),
       
-      #chapter 6
-      tabItem(tabName = "case-study", chapter8_ui),
+      tabItem(tabName = "contributors", uiOutput("contributorsTab")),
       
-      #chapter 7
-      tabItem(tabName = "contributors", chapter9_ui),
       
-      #chapter 8
       tabItem(tabName = "bibliography", chapter10_ui),
       
-      # Chapter 3
+     
       tabItem(tabName = "chapter3", chapter3_ui)
       
-      # Add more tabItems as needed
+      
     )
   )
 )
@@ -115,7 +96,48 @@ ui <- dashboardPage(
 # Define the server logic for the Shiny app
 server <- function(input, output, session) {
   chapter3_server(input, output, session)
-  # Add more server logic as needed
+  output$introTab <- renderUI({
+    includeMarkdown("chapters/Introduction.Rmd")  
+  })
+  output$contextTab <- renderUI({
+    includeMarkdown("chapters/Context.Rmd")
+  })
+  output$proposedsolutionTab <- renderUI({
+    includeMarkdown("chapters/Proposed-solution.Rmd")
+  })
+  output$MethodsTab <- renderUI({
+    includeMarkdown("chapters/Methods.Rmd")
+  })
+  output$querygenerationTab <- renderUI({
+    includeMarkdown("chapters/Querygeneration.Rmd")
+  })
+  output$semanticsearchTab <- renderUI({
+    includeMarkdown("chapters/Semanticsearch.Rmd")
+  })
+  output$topicmodelingTab <- renderUI({
+    includeMarkdown("chapters/topicmodeling.Rmd")
+  })
+  output$networkanalysisTab <- renderUI({
+    includeMarkdown("chapters/networkanalysis.Rmd")
+  })
+  output$ResultsTab <- renderUI({
+    includeMarkdown("chapters/Results.Rmd")
+  })
+  output$modeloutputTab <- renderUI({
+    includeMarkdown("chapters/modeloutput.Rmd")
+  })
+  output$modelperformanceTab <- renderUI({
+    includeMarkdown("chapters/modelperformance.Rmd")
+  })
+  output$implementationoptionsTab <- renderUI({
+    includeMarkdown("chapters/implementationoptions.Rmd")
+  })
+  output$casestudyTab <- renderUI({
+    includeMarkdown("chapters/casestudy.Rmd")
+  })
+  output$contributorsTab <- renderUI({
+    includeMarkdown("chapters/contributors.Rmd")
+  })
 }
 
 # Run the Shiny app

@@ -1,0 +1,11 @@
+## Model Output
+We refer to each combination of query selection, results retrieval, and relevance scoring method, as a "model". The output of each model is therefore the list of results returned.
+
+Each model returns a list of papers with the following information:
+
+* Dataset Title
+* Paper Title
+* Binary relevance
+* Continunous relevance score
+* Number of JDC tags mentioned
+* Percentage of paper dedicated to forced displacement
