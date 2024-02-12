@@ -1,4 +1,6 @@
 library(dplyr)
+library(ggplot2)
+library(rmarkdown)
 library(shiny)
 library(shinydashboard)
 library(RefManageR)
@@ -23,6 +25,7 @@ source("chapters/chapter8.R")
 source("chapters/chapter9.R")
 source("chapters/chapter10.R")
 source("chapters/chapter3.R")
+source(helperfunctions.R)
 
 # Define the UI for the Shiny app
 ui <- dashboardPage(
