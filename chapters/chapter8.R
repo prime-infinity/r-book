@@ -4,11 +4,11 @@ chapter8_ui <- box(
   title = "6. Case Study: VaSyR 2018",
   
   h3("6.1. Query generation"),
-  p("Each of the six queries returned X potentially relevant papers."),
+  p("LIST THE TEXT OF THE ACTUAL 6 QUERIES"),
   
   h3("6.2. Semantic Search"),
   
-  p("Each of the six queries returned X potentially relevant papers."),
+  p("Each of the six queries returned X potentially relevant papers. [GENERATE A DATA FRAME CONTAINING THE NUMBER OF RESULTS PER QUERY AND DISPLAY HERE"),
   
   h3("6.3. Topic Modeling"),
   
