@@ -9,7 +9,6 @@ library(RefManageR)
 
 # Load chapter files
 
-source("chapters/Contributors.R")
 source("chapters/Bibliography.R")
 source("chapters/chapter3.R")
 #source(helperfunctions.R)
