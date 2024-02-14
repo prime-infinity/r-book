@@ -4,6 +4,8 @@ library(rmarkdown)
 library(shiny)
 library(shinydashboard)
 library(RefManageR)
+library(reticulate)
+py_install("pandas")
 
 
 
