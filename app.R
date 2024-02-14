@@ -110,7 +110,10 @@ server <- function(input, output, session) {
     includeMarkdown("chapters/Methods.Rmd")
   })
   output$querygenerationTab <- renderUI({
-    includeMarkdown("chapters/Querygeneration.Rmd")
+    
+    rmarkdown::render("chapters/Querygeneration.Rmd")
+    includeHTML("chapters/Querygeneration.html")
+    
   })
   output$semanticsearchTab <- renderUI({
     includeMarkdown("chapters/Semanticsearch.Rmd")

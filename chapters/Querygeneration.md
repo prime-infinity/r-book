@@ -29,11 +29,29 @@ For our initial exploration, we define six simple query types which represent di
 Defining query structure is an important step, as the search output can be sensitive to the contents of the query used for the search. For example, the six queries above return different number of results if entered into Semantic Scholar. 
 
 The table below shows the number of results returned by Semantic Scholar for each dataset.
-```{python}
+
+```python
 import pandas as pd
 
 df = pd.read_csv("semantic_scholar_query_results_with_web_count.csv")
 df
+```
+
+```
+##       id  query_type1_pubs  ...  query_type6_pubs  no_related_pubs_jdc_website
+## 0     16                93  ...                 0                            0
+## 1    114                12  ...                 2                            1
+## 2    131                 3  ...                 0                            0
+## 3    132                34  ...                 0                            0
+## 4    136                15  ...                 2                            2
+## ..   ...               ...  ...               ...                          ...
+## 478  699                 2  ...                 0                            0
+## 479  700                 2  ...                 0                            0
+## 480  701                 1  ...                 0                            0
+## 481  703                 6  ...                 0                            0
+## 482  704                 0  ...                 0                            0
+## 
+## [483 rows x 8 columns]
 ```
 ####code results here
 
