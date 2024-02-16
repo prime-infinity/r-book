@@ -5,6 +5,7 @@ library(shiny)
 library(shinydashboard)
 library(RefManageR)
 library(reticulate)
+library(kableExtra)
 py_install("pandas")
 
 
@@ -137,7 +138,9 @@ server <- function(input, output, session) {
     includeMarkdown("chapters/implementationoptions.Rmd")
   })
   output$casestudyTab <- renderUI({
-    includeMarkdown("chapters/casestudy.Rmd")
+    #includeMarkdown("chapters/casestudy.Rmd")
+    rmarkdown::render("chapters/casestudy.Rmd")
+    includeHTML("chapters/casestudy.html")
   })
   output$contributorsTab <- renderUI({
     includeMarkdown("chapters/contributors.Rmd")

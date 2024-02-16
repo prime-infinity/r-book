@@ -35,7 +35,6 @@ import pandas as pd
 df = pd.read_csv("semantic_scholar_query_results_with_web_count.csv")
 df
 ```
-####code results here
 
 Each of these query strings is subsequently passed into the Semantic Scholar API. The following function generates a single query which can serve as an argument into another function.
 

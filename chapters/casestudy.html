@@ -11,7 +11,7 @@
 
 
 
-<title>Query Generation Report</title>
+<title>casestudy.knit</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,71 +348,58 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Query Generation Report</h1>
 
 </div>
 
 
 <div id="query-generation" class="section level2">
 <h2>Query Generation</h2>
-<p>We begin by generating a set of search queries based on the metadata
-for each dataset.</p>
-<p>The full query creation notebook can be found <a href="https://github.com/ofatunde/mdl-explorer-app/blob/main/notebooks/Semantic_Scholar_NLP4DEV.ipynb">here</a>.</p>
-<p>We start with simple methods of combining the metadata. The key
-metadata components that we use as an input into queries are: * Core
-survey name * Survey abbreviation (e.g., VaSyR) * Lead organization
-(e.g., UNHCR) - short or long versions may be used * Category (e.g.,
-Socioeconomic Asessment of Refugees) * Country * Year<br />
-For our initial exploration, we define six simple query types which
-represent different combinations of the information above :</p>
-<ul>
-<li><strong>Query type 1:</strong> lead_org_short + year + name +
-shortcode</li>
-<li><strong>Query type 2:</strong> lead_org_short + year + name +
-full_name</li>
-<li><strong>Query type 3:</strong> lead_org_short + year + name +
-shortcode_fullname</li>
-<li><strong>Query type 4:</strong> lead_org_long + year + name +
-shortcode</li>
-<li><strong>Query type 6:</strong> lead_org_long + year + name +
-shortcode_fullname</li>
-</ul>
-<p>Defining query structure is an important step, as the search output
-can be sensitive to the contents of the query used for the search. For
-example, the six queries above return different number of results if
-entered into Semantic Scholar.</p>
-<p>The table below shows the number of results returned by Semantic
-Scholar for each dataset.</p>
-<pre class="python"><code>import pandas as pd
-
-df = pd.read_csv(&quot;semantic_scholar_query_results_with_web_count.csv&quot;)
-df</code></pre>
-<pre><code>##       id  query_type1_pubs  ...  query_type6_pubs  no_related_pubs_jdc_website
-## 0     16                93  ...                 0                            0
-## 1    114                12  ...                 2                            1
-## 2    131                 3  ...                 0                            0
-## 3    132                34  ...                 0                            0
-## 4    136                15  ...                 2                            2
-## ..   ...               ...  ...               ...                          ...
-## 478  699                 2  ...                 0                            0
-## 479  700                 2  ...                 0                            0
-## 480  701                 1  ...                 0                            0
-## 481  703                 6  ...                 0                            0
-## 482  704                 0  ...                 0                            0
-## 
-## [483 rows x 8 columns]</code></pre>
-<p>Each of these query strings is subsequently passed into the Semantic
-Scholar API. The following function generates a single query which can
-serve as an argument into another function.</p>
-<p><code>{code-cell} # This function takes in the name of our dataframe, the id of the data set and the query number and returns the query. def query_finder(df_name: pd.DataFrame, dataset_id: int = 189, query_number:int =1 )-&gt;str:     &quot;&quot;&quot; Function takes in the query dataframe, the dataset ID and the query type number and retuns the query itself&quot;&quot;&quot;     df_indexid = df_name.set_index(&#39;id&#39;)     query = df_indexid.loc[189][f&quot;query_type{query_number}&quot;]     return query</code></p>
-<p>Future work will draw on more sophisticated methods of constructing
-queries.</p>
-<div id="next-steps" class="section level3">
-<h3>Next steps</h3>
-<p>After generating these queries, we treat them as inputs to the
-Semantic Scholar API. See <a href="methods/semantic-search.md">the next
-section</a> for more details.</p>
+<p>Below are the query components that were generated for dataset
+params$selected dataset.</p>
 </div>
+<div id="semantic-search" class="section level2">
+<h2>Semantic Search</h2>
+<p>Each of the six queries returned X potentially relevant papers.</p>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+</div>
+<div id="topic-modeling" class="section level2">
+<h2>Topic Modeling</h2>
+<p>Out of the XX papers returned across the six query types, YYY had
+abstracts available in either the NLP4Dev or Semantic Scholar corpuses,
+and ZZZ had full body text available.</p>
+<p>These were used as inputs to the NLP4Dev API, as described in Section
+3.5.</p>
+<p>XXX were defined as relevant.</p>
+<pre><code>## | query_type|total_result_count |full_text_available |abstract_only |relevant | |----------:|:------------------|:-------------------|:-------------|:--------| |          1|NA                 |NA                  |NA            |NA       | |          2|NA                 |NA                  |NA            |NA       | |          3|NA                 |NA                  |NA            |NA       | |          4|NA                 |NA                  |NA            |NA       | |          5|NA                 |NA                  |NA            |NA       | |          6|NA                 |NA                  |NA            |NA       |</code></pre>
+</div>
+<div id="model-output" class="section level2">
+<h2>Model Output</h2>
+<p>Following manual review of the papers identified automatically, XXX
+were confirmed as relevant. Of these XXX, YYY had previously been
+identified through the manual procedure, and ZZZ were new.</p>
+<p>This represents a XXX percent improvement over the baseline.</p>
+</div>
+<div id="evaluating-model-performance" class="section level2">
+<h2>Evaluating Model Performance</h2>
+<p>Based on our selected evaluation metric, Query X performed most
+effectively.</p>
+<pre><code>## &lt;table&gt;
+##  &lt;thead&gt;
+##   &lt;tr&gt;
+##    &lt;th style=&quot;text-align:right;&quot;&gt; x &lt;/th&gt;
+##   &lt;/tr&gt;
+##  &lt;/thead&gt;
+## &lt;tbody&gt;
+##   &lt;tr&gt;
+## 
+##   &lt;/tr&gt;
+## &lt;/tbody&gt;
+## &lt;/table&gt;</code></pre>
+</div>
+<div id="network" class="section level2">
+<h2>Network</h2>
+<p>Below is the distribution of fields and geographic locations from the
+papers that referenced this dataset.</p>
 </div>
 
 

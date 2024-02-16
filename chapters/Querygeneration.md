@@ -53,7 +53,6 @@ df
 ## 
 ## [483 rows x 8 columns]
 ```
-####code results here
 
 Each of these query strings is subsequently passed into the Semantic Scholar API. The following function generates a single query which can serve as an argument into another function.
 
