@@ -1,3 +1,15 @@
+---
+title: "case_study"
+output: html_document
+date: "2024-02-11"
+params:
+  selected_dataset: 5
+  selected_query_type: 2
+  query_count_table: NA
+    
+---
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -16,12 +28,35 @@ Each of the six queries returned X potentially relevant papers.
 
 ```{r echo=FALSE}
 # Load required libraries
-library(shiny)
-library(kableExtra)
 
-# UI for Shiny app
-ui <- fluidPage(
-  selectInput(
+
+
+# Server for Shiny app
+# server <- function(input, output) {
+#   # Reactive function to read and display results based on user input
+#   query_results <- reactive({
+#     # Build file path based on user input
+#     file_path <- paste0("dataset", input$selected_dataset, "_query", input$selected_query, ".csv")
+# 
+#     # Load results for the selected dataset and query
+#     results <- read.csv(file_path)
+# 
+#     # Count the number of rows in the results
+#     query_count <- nrow(results)
+# 
+#     # Create a data frame for displaying results
+#     query_count_table <- data.frame(query_type = input$selected_query, query_count = query_count)
+# 
+# 
+#   })
+# 
+#   # Render the table based on reactive function
+#   output$query_results <- renderTable({
+#     query_results()
+#   }, sanitize.text.function = function(x) x)
+# }
+
+selectInput(
     inputId = "selected_dataset",
     label = "Select dataset number",
     choices = c(189, 154, 160),
@@ -30,58 +65,45 @@ ui <- fluidPage(
     selectize = TRUE,
     width = NULL,
     size = NULL
-  ),
-  selectInput(
-    inputId = "selected_query",
+)
+
+selectInput(
+    inputId = "selected_query_type",
     label = "Select query type",
-    choices = c(1, 2, 3, 4, 5),
+    choices = c(1:6),
     selected = 1,
     multiple = FALSE,
     selectize = TRUE,
     width = NULL,
     size = NULL
-  ),
-  tableOutput("query_results")
 )
 
-# Server for Shiny app
-server <- function(input, output) {
-  # Reactive function to read and display results based on user input
-  query_results <- reactive({
-    # Build file path based on user input
-    file_path <- paste0("dataset", input$selected_dataset, "_query", input$selected_query, ".csv")
-    
-    # Load results for the selected dataset and query
-    results <- read.csv(file_path)
-    
-    # Count the number of rows in the results
-    query_count <- nrow(results)
-    
-    # Create a data frame for displaying results
-    query_count_table <- data.frame(query_type = input$selected_query, query_count = query_count)
-    
+renderUI({
+  data.frame(select1 = params$selected_dataset, select2 = params$selected_query_type) %>% 
+    kable(
+      #x = query_count_table,
+      #valign = "t",
+      caption = "Number of search results for the selected query",
+      #full_width = F,
+      # format = "markdown"
+) %>% 
+    kable_styling("striped") %>% 
+    HTML()
+}) 
+
+
+
     # Print the results using kableExtra::kbl
-    table <- kableExtra::kbl(
+table <- kableExtra::kbl(
       x = query_count_table,
       valign = "t",
       caption.short = "Number of search results for the selected query",
       full_width = F,
       format = "markdown"
-    )
-    
-    # Return the table
-    table
-  })
-  
-  # Render the table based on reactive function
-  output$query_results <- renderTable({
-    query_results()
-  }, sanitize.text.function = function(x) x)
-}
+)
 
-# Run Shiny app
-shinyApp(ui, server)
-
+# Return the table
+table
  
 ```
 
@@ -101,10 +123,10 @@ table <- kableExtra::kbl(
     x = relevance_summary_table,
     valign = "t",
     caption.short = "Summary of results per query"
-, full_width = F,
-  format = "markdown",
-)
-cat(table)
+, full_width = F
+) %>% kable_styling("striped")
+
+table
 ```
 
 
@@ -135,7 +157,8 @@ table <- kableExtra::kbl(
     valign = "t",
     caption.short = "Summary of results per query"
 , full_width = F)
-cat(table)
+ 
+table
 ```
 
 ## Network
