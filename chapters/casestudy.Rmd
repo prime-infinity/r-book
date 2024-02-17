@@ -128,6 +128,10 @@ your_csv_data_1 <- read.csv(csv_path_1)
 csv_path_2 <- here("data", "majority_country_summary_abstract_body.csv")
 your_csv_data_2 <- read.csv(csv_path_2)
 
+# Read the third CSV file
+csv_path_3 <- here("data", "jdc_count_summary_abstract_body.csv")
+your_csv_data_3 <- read.csv(csv_path_3)
+
 
 selectInput(
     inputId = "selected_paper_id",
@@ -145,12 +149,15 @@ renderUI({
   if (!is.null(params$selected_paper_id)) {
     selected_paper_1 <- your_csv_data_1[your_csv_data_1$paper_id == params$selected_paper_id, ]
     selected_paper_2 <- your_csv_data_2[your_csv_data_2$paper_id == params$selected_paper_id, ]
+    selected_paper_3 <- your_csv_data_3[your_csv_data_3$paper_id == params$selected_paper_id, ]
     
     output_data <- data.frame(
-      Abstract = selected_paper_1$topic_39_abstract,
-      Full_Text = selected_paper_1$topic_39_full_text,
+      Abstract_Topic39 = selected_paper_1$topic_39_abstract,
+      Full_Text_Topic39 = selected_paper_1$topic_39_full_text,
       Abstract_Majority_Country = selected_paper_2$abstract_majority_country,
-      Body_Majority_Country = selected_paper_2$body_majority_country
+      Body_Majority_Country = selected_paper_2$body_majority_country,
+      Abstract_Tag_count = selected_paper_3$jdc__tag_count_abstract,
+      Full_Text_Tag_count = selected_paper_3$jdc__tag_count_full_text
     )
     
     kable_styling("striped") %>% 
