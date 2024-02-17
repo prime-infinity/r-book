@@ -1,3 +1,5 @@
 /chapters/data
 concatenated_results_12_May.csv
 .Rproj.user
+.Rdata
+.Rhistory
