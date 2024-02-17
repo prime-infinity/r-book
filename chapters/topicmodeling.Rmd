@@ -31,7 +31,7 @@ The JDC tags include the following:
 * "unhcr"
 
 
-```{code-cell}
+```{python}
 
 def NLP4Dev(abstract_or_fulltext,text_source):
 
@@ -84,7 +84,7 @@ def NLP4Dev(abstract_or_fulltext,text_source):
 
 We use the outputs from the NLP4Dev to calculate a "relevance" score for each dataset-paper compbination
 
-```{code-cell}
+```{python}
 def calculate_relevance(ref,dataset, topic_39_percentage, jdc_tag_count,majority_country,relevance_threshold, paper_title = None):
     #We should define ref as a global variable if the app will always be reading from that one file
     # removed the paper titles argument because we are not using it anywhere in the function. Check with Mureji.

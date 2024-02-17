@@ -97,6 +97,8 @@ XXX were defined as relevant.
 relevance_summary_table <- data.frame(query_type = c(1:6), total_result_count = NA, full_text_available = NA, abstract_only = NA, relevant = NA)
 # Calculate the figures for full text and abstract, and use them to populate the table
 
+
+
 table <- kableExtra::kbl(
     x = relevance_summary_table,
     valign = "t",
