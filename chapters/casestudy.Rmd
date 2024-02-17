@@ -93,14 +93,14 @@ renderUI({
 
 
 
-    # Print the results using kableExtra::kbl
+# Print the results using kableExtra::kbl
 table <- kableExtra::kbl(
       x = query_count_table,
       valign = "t",
       caption.short = "Number of search results for the selected query",
       full_width = F,
       format = "markdown"
-)
+)  %>% kable_styling("striped")
 
 # Return the table
 table

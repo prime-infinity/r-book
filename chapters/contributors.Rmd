@@ -1,8 +1,32 @@
-# Contributors
-Contributors to this project, as well as their contact information, are listed below.
+---
+title: "contributors"
+output: html_document
+date: "2024-02-11"
 
-| **Name** 	| **Institution** 	| **Email** 	|
-|---	|---	|---	|
-| Olumurejiwa Fatunde 	| University of Toronto/JDC 	| atoke91@gmail.com 	|
-| Patrick Brock 	| UNHCR/JCR 	| brock@unhcr.org 	|
+---
+
+
+# Contact
+The primary contacts for this project are listed below.
+
+
+```{r echo=FALSE}
+contacts <- data.frame(Name = c("Patrick Brock", "Olumurejiwa Fatunde"),
+                       Institution = c("UNHCR/JDC", "University of Toronto/JDC"),
+                       Email = c("brock@unhcr.org", "atoke91@gmail.com"))
+
+# Print the results using kableExtra::kbl
+table <- kableExtra::kbl(
+      x = contacts,
+      valign = "t",
+      caption.short = "Project contacts",
+      full_width = F,
+      format = "markdown"
+)  %>% kable_styling("striped")
+ 
+# Return the table
+table
+```
+
+
 
