@@ -30,4 +30,21 @@ We considered several options, which are listed below.
 | 3 	| Percent unique 	| xx 	| xx 	| xx 	|
 
 
+```{r echo=FALSE}
+model_evaluation_table <- data.frame(`Evaluation Metric` = c("Precision","Recall","Percent Unique"), Definition = NA, Benefits = NA, `Other Considerations` = NA)
+# Calculate the figures for full text and abstract, and use them to populate the table
+
+
+
+table <- kableExtra::kbl(
+    x = model_evaluation_table,
+    valign = "t",
+    caption.short = "Evaluation metric options"
+, full_width = F
+,format = "markdown"
+) %>% kable_styling("striped")
+
+table
+```
+
 Our primary metric will be XXX based on the work of YYY.
