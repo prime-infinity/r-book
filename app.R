@@ -121,7 +121,9 @@ server <- function(input, output, session) {
     includeMarkdown("chapters/Semanticsearch.Rmd")
   })
   output$topicmodelingTab <- renderUI({
-    includeMarkdown("chapters/topicmodeling.Rmd")
+    #includeMarkdown("chapters/topicmodeling.Rmd")
+    rmarkdown::render("chapters/topicmodeling.Rmd")
+    includeHTML("chapters/topicmodeling.html")
   })
   output$networkanalysisTab <- renderUI({
     includeMarkdown("chapters/networkanalysis.Rmd")
