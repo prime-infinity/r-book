@@ -7,6 +7,7 @@ library(RefManageR)
 library(reticulate)
 library(kableExtra)
 py_install("pandas")
+library(here)
 here::i_am("app.R")
 
 
