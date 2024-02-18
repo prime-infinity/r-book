@@ -37,27 +37,29 @@ chapter3_ui <- box(
     
      fluidRow(
        # Table output from the original code
-       tableOutput("table1")
+       htmlOutput("table1")
      ),
-     fluidRow(
-       # Additional Markdown content
-       tags$div(
-         HTML("## Additional Content"),
-         HTML("This is some additional Markdown content."),
-         HTML("You can include more text, lists, images, etc.")
-       )
-     ),
+     # fluidRow(
+     #   # Additional Markdown content
+     #   tags$div(
+     #     #HTML("## Additional Content"),
+     #     #HTML("This is some additional Markdown content."),
+     #     #HTML("You can include more text, lists, images, etc.")
+     #   )
+     # ),
     width = 12
 )
 
 
 chapter3_server <- function(input, output, session) {
-  output$table1 <- renderTable({
-    # input$newplot
-    # Add a little noise to the cars data
-    input_data %>%
+  output$table1 <- renderText({
+    kable(input_data %>%
       filter(dataset_id == input$selected_dataset,
-             query_type == input$selected_query)
+             query_type == input$selected_query))%>%
+      kable_styling("striped", 
+                    full_width = F) %>%
+      scroll_box(width = "100%", height = "400px")
+    
   })
 }
 

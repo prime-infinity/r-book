@@ -1,10 +1,12 @@
 ---
 title: "contributors"
-output: html_document
 date: "2024-02-11"
-
+output: 
+  html_documentdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAYAAABB7B6eAAABCklEQVR42p2ULQ7CMBiGISQIDAqHxKLxOwAX2Am4ACEkKAQ3IFkgbbd1XVJH0Hg0FskFsBhKi4L2XdJvb1K150nWn/frrDdbw3MVLFGoZecnsVwQY0y3QX4LUaVUDkZr3W+QX6xQCZWDyTI9bJCfnMsplYM5SDlGssjVw32jcjDHspxgub4zpkdUDoYV9azhGK5Zdh5QORgh6jmSWa5O9rJ7VA7vRFQL/PbrfRsuiIVWSHR/3IbzjqhKXYmQ5EpH5bxLVokrD5Jc2ajc/7HYsnxLAyRXMioXFM2VBUl+0WK4YFRY6IYkf1TEcMGws9AFSf6wi+GCcc0LJZHkj+sYDr31HdyufdttOD8f3G/pQdD2FdIAAAAASUVORK5CYII=
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+```
 
 # Contact
 The primary contacts for this project are listed below.

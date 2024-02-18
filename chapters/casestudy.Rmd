@@ -1,18 +1,19 @@
 ---
 title: "case_study"
+runtime: shiny
 output: html_document
 date: "2024-02-11"
 params:
   selected_dataset: 5
   selected_query_type: 2
   query_count_table: NA
-    
+  
 ---
 
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
 ```
 
 ## Query Generation
@@ -20,11 +21,14 @@ knitr::opts_chunk$set(echo = TRUE)
 Below are the query components that were generated for dataset params$selected dataset.
 
 ```{r echo=FALSE}
+
+
 ###THIS CHUNK SHOULD PRINT THE LIST OF QUERIES (THEIR ACTUAL TEXT)
 ```
 
 ## Semantic Search
 Each of the six queries returned X potentially relevant papers.
+
 
 ```{r echo=FALSE}
 # Load required libraries
@@ -78,29 +82,25 @@ selectInput(
     size = NULL
 )
 
-renderUI({
-  data.frame(select1 = params$selected_dataset, select2 = params$selected_query_type) %>% 
-    kable(
-      #x = query_count_table,
-      #valign = "t",
-      caption = "Number of search results for the selected query",
-      #full_width = F,
-      # format = "markdown"
-) %>% 
-    kable_styling("striped") %>% 
-    HTML()
+output_table <- reactive({data.frame(select1 = input$selected_dataset
+               , select2 = input$selected_query_type)})
+
+
+renderTable({ 
+    output_table()
 }) 
 
 
 
 # Print the results using kableExtra::kbl
-table <- kableExtra::kbl(
+table <-  kableExtra::kbl(
       x = query_count_table,
       valign = "t",
       caption.short = "Number of search results for the selected query",
       full_width = F,
       format = "markdown"
 )  %>% kable_styling("striped")
+
 
 # Return the table
 table
@@ -124,6 +124,7 @@ table <- kableExtra::kbl(
     valign = "t",
     caption.short = "Summary of results per query"
 , full_width = F
+,format = "markdown"
 ) %>% kable_styling("striped")
 
 table

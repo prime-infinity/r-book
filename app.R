@@ -7,13 +7,13 @@ library(RefManageR)
 library(reticulate)
 library(kableExtra)
 py_install("pandas")
-
+here::i_am("app.R")
 
 
 # Load chapter files
 
-source("chapters/Bibliography.R")
-source("chapters/chapter3.R")
+source(here::here("chapters/Bibliography.R"))
+source(here::here("chapters/chapter3.R"))
 #source(helperfunctions.R)
 
 # Define the UI for the Shiny app
@@ -42,13 +42,13 @@ ui <- dashboardPage(
                menuSubItem("4.2. Evaluation Model Performance", tabName = "model-performance")
       ),
       
-      menuItem("5.Implementation Options", tabName = "implementation-options"),
+      #menuItem("5.Implementation Options", tabName = "implementation-options"),
       
-      menuItem("6.Case Study: VaSyR 2018", tabName = "case-study"),
+      menuItem("5.Case Study: VaSyR 2018", tabName = "case-study"),
       
-      menuItem("7.Contributors", tabName = "contributors"),
+      menuItem("6.Contact", tabName = "contributors"),
       
-      menuItem("8.Bibliography", tabName = "bibliography"),
+      menuItem("7.Bibliography", tabName = "bibliography"),
       
       menuItem("Chapter 3", tabName = "chapter3")
       # Add more menu items as needed
@@ -76,7 +76,7 @@ ui <- dashboardPage(
         tabItem(tabName = "model-performance",uiOutput("modelperformanceTab")),
     
      
-      tabItem(tabName = "implementation-options", uiOutput("implementationoptionsTab")),
+      #tabItem(tabName = "implementation-options", uiOutput("implementationoptionsTab")),
       
       
       tabItem(tabName = "case-study", uiOutput("casestudyTab")),

@@ -1,3 +1,21 @@
+---
+title: "case_study"
+runtime: shiny
+output: html_document
+date: "2024-02-11"
+params:
+  selected_dataset: 5
+  selected_query_type: 2
+  query_count_table: NA
+  
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+```
+
 ## Evaluating Model performance
 Because each model has unique inputs and outputs, we can evaluate each model on some relevant performance metric. Our main aim is to evaluate how effective each model is at returning the highest number of "potentially relevant results that are subsequently confirmed to be truly relevant.
 

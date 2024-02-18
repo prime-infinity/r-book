@@ -24,21 +24,31 @@ For our initial exploration, we define six simple query types which represent di
 * __Query type 2:__ lead_org_short + year + name + full_name
 * __Query type 3:__ lead_org_short + year + name + shortcode_fullname
 * __Query type 4:__ lead_org_long + year + name + shortcode
+* __Query type 5:__ lead_org_long + year + name + full_name
 * __Query type 6:__ lead_org_long + year + name + shortcode_fullname
 
 Defining query structure is an important step, as the search output can be sensitive to the contents of the query used for the search. For example, the six queries above return different number of results if entered into Semantic Scholar. 
 
 The table below shows the number of results returned by Semantic Scholar for each dataset.
-```{python}
-import pandas as pd
 
-df = pd.read_csv("semantic_scholar_query_results_with_web_count.csv")
-df
+```{r echo=FALSE}
+
+df <- read.csv("semantic_scholar_query_results_with_web_count.csv")
+
+table <- kableExtra::kbl(
+    x = df,
+    valign = "t",
+    caption.short = "Summary of results per query"
+, full_width = F
+,format = "markdown"
+) %>% kable_styling("striped")
+
+table
 ```
 
 Each of these query strings is subsequently passed into the Semantic Scholar API. The following function generates a single query which can serve as an argument into another function.
 
-```{code-cell}
+```{python echo = TRUE}
 # This function takes in the name of our dataframe, the id of the data set and the query number and returns the query.
 def query_finder(df_name: pd.DataFrame, dataset_id: int = 189, query_number:int =1 )->str:
     """ Function takes in the query dataframe, the dataset ID and the query type number and retuns the query itself"""

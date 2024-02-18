@@ -1,7 +1,7 @@
 ## Semantic search
 We made use of the [Semantic Scholar API](https://www.semanticscholar.org/product/api). For each of the query strings generated in the last section, we pass them to the ["Paper Lookup" API endpoint](https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data), which we access through the [SemanticScholar Python library](https://github.com/danielnsilva/semanticscholar) using the following call:
 
-```{code-cell}
+```{python echo = TRUE}
 sch = SemanticScholar()
 query_type1 = []
 for i in dfq["query_type1"]:
@@ -23,7 +23,7 @@ The output is an object which includes (among others) the following information:
 
 We extract abstracts from this output, giving us an abstract for each dataset-query-paper combination where an abstract is available. The abstract, together with the indicator of PDF availability, serves as an input into our topic modeling procedure (see the next section.)
 
-```{code-cell}
+```{python echo = TRUE}
 def semantic_search(query:str)->pd.DataFrame:
     """ This function takes in a query (from the query_finder function) and returns a dataframe of abtracts and corpus IDS"""
     sch = SemanticScholar()
@@ -43,3 +43,5 @@ Where available, we also parse PDF content. When we parse a PDF, the output is a
 * Abstract (if available)
 * Body text (if available)
 * Bibliographic entries
+
+

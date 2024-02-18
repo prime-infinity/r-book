@@ -1,7 +1,7 @@
 ## Topic Modeling and Sentiment Analysis
 We imported the documents available in the Semantic Scholar and NPL4Dev corpuses.
 
-We make use of the [NLP4Dev API] (https://www.nlp4dev.org/content-api). Depending on whether the paper contents are available in parsed or PDF formay, we use either the "Analyze Text" or the "Analyze File" endpoint. In both cases we make use of the Mallet topic model, which allows us to use the abstract or full text of a paper as an input and retrieve information about the paper content as an output.
+We make use of the [NLP4Dev API] (https://www.nlp4dev.org/content-api). Depending on whether the paper contents are available in parsed or PDF format, we use either the "Analyze Text" or the "Analyze File" endpoint. In both cases we make use of the Mallet topic model, which allows us to use the abstract or full text of a paper as an input and retrieve information about the paper content as an output.
 
 We run the abstracts or PDF text from the Semantic Scholar results through the NLP4DEV API, which returns the following information:
 
@@ -31,7 +31,7 @@ The JDC tags include the following:
 * "unhcr"
 
 
-```{code-cell}
+```{python echo = TRUE}
 
 def NLP4Dev(abstract_or_fulltext,text_source):
 
@@ -80,11 +80,15 @@ def NLP4Dev(abstract_or_fulltext,text_source):
         return topic_distribution , country_distribution , tag_distribution , majority_country , topic_39_percentage, jdc_tag_count
 ```
 
-\[ include a sample of text showing topic distribution \]
+We see that there is a positive correlation between topic percentage calculated using abstract vs PDF. 
 
-We use the outputs from the NLP4Dev to calculate a "relevance" score for each dataset-paper compbination
+```{r, echo = TRUE, out.width='25%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions', asis}
+knitr::include_graphics(here::here("figures/full_text_abstract_percentage.png"))
+```
 
-```{code-cell}
+We use the outputs from the NLP4Dev to calculate a "relevance" score for each dataset-paper combination.
+
+```{python echo = TRUE}
 def calculate_relevance(ref,dataset, topic_39_percentage, jdc_tag_count,majority_country,relevance_threshold, paper_title = None):
     #We should define ref as a global variable if the app will always be reading from that one file
     # removed the paper titles argument because we are not using it anywhere in the function. Check with Mureji.
@@ -105,4 +109,4 @@ def calculate_relevance(ref,dataset, topic_39_percentage, jdc_tag_count,majority
 ```
 
 
-The outputs of this relevance function are returned to users in our [user tool](implementation-options.md).
+The outputs of this relevance function are returned to users via our user interface (See "Case Study").
