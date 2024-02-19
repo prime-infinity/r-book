@@ -1,6 +1,5 @@
 ---
 title: "case_study"
-runtime: shiny
 output: html_document
 date: "2024-02-11"
 params:
@@ -13,7 +12,7 @@ params:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Query Generation
@@ -21,14 +20,11 @@ knitr::opts_chunk$set(warning = FALSE)
 Below are the query components that were generated for dataset params$selected dataset.
 
 ```{r echo=FALSE}
-
-
 ###THIS CHUNK SHOULD PRINT THE LIST OF QUERIES (THEIR ACTUAL TEXT)
 ```
 
 ## Semantic Search
 Each of the six queries returned X potentially relevant papers.
-
 
 ```{r echo=FALSE}
 # Load required libraries
@@ -82,25 +78,29 @@ selectInput(
     size = NULL
 )
 
-output_table <- reactive({data.frame(select1 = input$selected_dataset
-               , select2 = input$selected_query_type)})
-
-
-renderTable({ 
-    output_table()
+renderUI({
+  data.frame(select1 = params$selected_dataset, select2 = params$selected_query_type) %>% 
+    kable(
+      #x = query_count_table,
+      #valign = "t",
+      caption = "Number of search results for the selected query",
+      #full_width = F,
+      # format = "markdown"
+) %>% 
+    kable_styling("striped") %>% 
+    HTML()
 }) 
 
 
 
 # Print the results using kableExtra::kbl
-table <-  kableExtra::kbl(
+table <- kableExtra::kbl(
       x = query_count_table,
       valign = "t",
       caption.short = "Number of search results for the selected query",
       full_width = F,
       format = "markdown"
 )  %>% kable_styling("striped")
-
 
 # Return the table
 table
@@ -172,6 +172,73 @@ renderUI({
 ```
 
 
+##my relevance
+
+```{r echo=FALSE}
+library(here)
+setwd(here::here())
+
+# Load Python script with calculate_relevance function
+source_python(here("chapters/relevance_calculator.py"))
+
+# Define the calculate_relevance_for_pair R function
+calculate_relevance_for_pair <- function(paper_id, dataset_number,topic_39_percentage, jdc_tag_count, majority_country) {
+  # Use reticulate to call the calculate_relevance Python function
+  result <- py$calculate_relevance(paper_id, dataset_number,topic_39_percentage, jdc_tag_count, majority_country)
+  return(result)
+}
+
+
+selectInput(
+  inputId = "selected_paper_id",
+  label = "Select paper ID",
+  choices = unique(your_csv_data_1$paper_id),
+  selected = params$selected_paper_id,
+  multiple = FALSE,
+  selectize = TRUE,
+  width = NULL,
+  size = NULL
+)
+
+renderUI({
+  if (!is.null(params$selected_paper_id)) {
+    selected_paper_1 <- your_csv_data_1[your_csv_data_1$paper_id == params$selected_paper_id, ]
+    selected_paper_2 <- your_csv_data_2[your_csv_data_2$paper_id == params$selected_paper_id, ]
+    selected_paper_3 <- your_csv_data_3[your_csv_data_3$paper_id == params$selected_paper_id, ]
+    
+    topic_39_percentage <- selected_paper_1$topic_39_full_text
+    majority_country <- selected_paper_2$body_majority_country
+    jdc_tag_count <- selected_paper_3$jdc__tag_count_full_text
+    
+    # Call the R function to calculate relevance using the Python function
+    relevance_result <- calculate_relevance_for_pair(
+      paper_id = params$selected_paper_id,
+      dataset_number = dataset_number,
+      topic_39_percentage = topic_39_percentage,
+      jdc_tag_count = jdc_tag_count,
+      majority_country = majority_country
+    )
+    
+    output_data <- data.frame(
+      Abstract_Topic39 = selected_paper_1$topic_39_abstract,
+      Full_Text_Topic39 = topic_39_percentage,
+      Abstract_Majority_Country = selected_paper_2$abstract_majority_country,
+      Body_Majority_Country = majority_country,
+      Abstract_Tag_count = selected_paper_3$jdc__tag_count_abstract,
+      Full_Text_Tag_count = jdc_tag_count,
+      Relevance = relevance_result$Relevance
+    )
+    
+    kable_styling("striped") %>% 
+      HTML()
+  } else {
+    "Please select a paper ID."
+  }
+})
+
+
+```
+
 ##code template below
 
 ```{r echo=FALSE}
@@ -185,7 +252,6 @@ table <- kableExtra::kbl(
     valign = "t",
     caption.short = "Summary of results per query"
 , full_width = F
-,format = "markdown"
 ) %>% kable_styling("striped")
 
 table
