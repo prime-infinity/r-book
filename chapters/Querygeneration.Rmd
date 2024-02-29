@@ -1,8 +1,11 @@
 ---
-title: "Query Generation Report"
-output: 
-  html_document:
-    keep_md: true
+runtime: shiny
+output: html_document
+params:
+  selected_dataset: 5
+  selected_query_type: 2
+  query_count_table: NA
+  selected_paper_id: 1
 ---
 
 
@@ -35,26 +38,33 @@ The table below shows the number of results returned by Semantic Scholar for eac
 
 df <- read.csv("semantic_scholar_query_results_with_web_count.csv")
 
-table <- kableExtra::kbl(
-    x = df,
-    valign = "t",
-    caption.short = "Summary of results per query"
-, full_width = F
-,format = "markdown"
-) %>% kable_styling("striped")
+# table <- kableExtra::kbl(
+#     x = df,
+#     valign = "t",
+#     caption.short = "Summary of results per query"
+# , full_width = F
+# , format = "markdown"
+# ) %>% kable_styling("striped") %>%
+#       scroll_box(width = "100%", height = "300px")
+
+table <- kable(df) %>%
+      kable_styling("striped", 
+                    full_width = F) %>%
+      scroll_box(width = "100%", height = "400px")
 
 table
 ```
 
-Each of these query strings is subsequently passed into the Semantic Scholar API. The following function generates a single query which can serve as an argument into another function.
+Each of these query strings is subsequently passed into the Semantic Scholar API. 
 
-```{python echo = TRUE}
+```{r echo = FALSE}
+#The following function generates a single query which can serve as an argument into another function.
 # This function takes in the name of our dataframe, the id of the data set and the query number and returns the query.
-def query_finder(df_name: pd.DataFrame, dataset_id: int = 189, query_number:int =1 )->str:
-    """ Function takes in the query dataframe, the dataset ID and the query type number and retuns the query itself"""
-    df_indexid = df_name.set_index('id')
-    query = df_indexid.loc[189][f"query_type{query_number}"]
-    return query 
+#def query_finder(df_name: pd.DataFrame, dataset_id: int = 189, query_number:int =1 )->str:
+#    """ Function takes in the query dataframe, the dataset ID and the query type number and retuns the query itself"""
+#    df_indexid = df_name.set_index('id')
+#    query = df_indexid.loc[189][f"query_type{query_number}"]
+#    return query 
 ```
 
 Future work will draw on more sophisticated methods of constructing queries.

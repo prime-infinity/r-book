@@ -1,8 +1,6 @@
 ---
-title: "case_study"
 runtime: shiny
 output: html_document
-date: "2024-02-11"
 params:
   selected_dataset: 5
   selected_query_type: 2
@@ -18,7 +16,7 @@ knitr::opts_chunk$set(warning = FALSE)
 
 ## Query Generation
 
-Below are the query components that were generated for dataset params$selected dataset.
+Below are the query components that were generated for dataset params$selected_dataset.
 
 ```{r echo=FALSE}
 
@@ -27,6 +25,7 @@ Below are the query components that were generated for dataset params$selected d
 ```
 
 ## Semantic Search
+
 Each of the six queries returned X potentially relevant papers.
 
 
@@ -90,7 +89,7 @@ renderTable({
     output_table()
 }) 
 
-
+query_count_table <- data.frame(test1 = c(1:10), test2 = c(11:20))
 
 # Print the results using kableExtra::kbl
 table <-  kableExtra::kbl(
@@ -223,9 +222,9 @@ table <- kableExtra::kbl(
 table
 ```
 
-## Network
+## Network Analysis
 
-Below is the distribution of fields and geographic locations from the papers that referenced this dataset.
+Below is the distribution of fields and geographic locations identified among the papers that referenced this dataset.
 
 ```{r echo=FALSE}
 #selectInput("query_type", label = "Select a query type:",

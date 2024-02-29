@@ -33,10 +33,9 @@ The table below shows the number of results returned by Semantic Scholar for eac
 
 
 ```
-## Warning in kable_styling(., "striped"): Please specify
-## format in kable. kableExtra can customize either HTML or
-## LaTeX outputs. See https://haozhu233.github.io/kableExtra/
-## for details.
+## Warning in kable_styling(., "striped"): Please specify format in kable.
+## kableExtra can customize either HTML or LaTeX outputs. See
+## https://haozhu233.github.io/kableExtra/ for details.
 ```
 
 

@@ -3,4 +3,6 @@
 
 The final portion of our methodology allows us to obtain higher-level insights about the network of authors/papers making use of UNHCR microdata.
 
-{cite}`ValenzuelaEscarcega2015IdentifyingMC` have worked on identifying "meaningful" citations Researchers such as {cite}`Cohan2019` and {cite}`teufel-etal-2006-annotation` have developed methods for inferring "citation intent", or information about _how_ a paper references another paper (or in our case, a dataset). {cite}`Jurgens2018` extend this to use citations as a lens through which to understand the evolution of a given scientific field.
+{cite}`ValenzuelaEscarcega2015IdentifyingMC` have worked on identifying "meaningful" citations. A recent World Bank Policy paper by Stacy ,et al. (2024) tracks the use by academics of data focused on a particular country. Researchers such as {cite}`Cohan2019` and {cite}`teufel-etal-2006-annotation` have developed methods for inferring "citation intent", or information about _how_ a paper references another paper (or in our case, a dataset). {cite}`Jurgens2018` extend this to use citations as a lens through which to understand the evolution of a given scientific field.
+
+We begin by cataloguing the most frequently-mentioned countries in each paper, which is determined from the analysis of abstract or full-body text. In future work we will extend this to explore relationships between country mentions and citation intent.

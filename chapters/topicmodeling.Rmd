@@ -1,3 +1,7 @@
+---
+output: html_document
+---
+
 ## Topic Modeling and Sentiment Analysis
 We imported the documents available in the Semantic Scholar and NPL4Dev corpuses.
 
@@ -82,7 +86,7 @@ def NLP4Dev(abstract_or_fulltext,text_source):
 
 We see that there is a positive correlation between topic percentage calculated using abstract vs PDF. 
 
-```{r, echo = TRUE, out.width='25%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions', asis}
+```{r, echo = FALSE, out.width='100%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions', asis}
 knitr::include_graphics(here::here("figures/full_text_abstract_percentage.png"))
 ```
 

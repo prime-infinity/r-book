@@ -3,9 +3,9 @@ bib_path <- "chapters/references.bib"
 
 # Read the BibTeX file into a bibliography object
 bib <- ReadBib(bib_path)
-chapter10_ui <- box(
+bibliography_ui <- box(
   
-  title = "8. Bibliography",
+  title = "Bibliography",
   
   # Render citations using RefManageR
   tags$ul(

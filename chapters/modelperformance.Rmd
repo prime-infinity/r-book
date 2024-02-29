@@ -1,8 +1,6 @@
 ---
-title: "case_study"
 runtime: shiny
 output: html_document
-date: "2024-02-11"
 params:
   selected_dataset: 5
   selected_query_type: 2
@@ -16,35 +14,83 @@ params:
 knitr::opts_chunk$set(warning = FALSE)
 ```
 
-## Evaluating Model performance
-Because each model has unique inputs and outputs, we can evaluate each model on some relevant performance metric. Our main aim is to evaluate how effective each model is at returning the highest number of "potentially relevant results that are subsequently confirmed to be truly relevant.
+## Evaluating Model Performance
+Because each model has unique inputs and outputs, we can evaluate and compare their performance.
 
-There are several metrics that we could use to evaluate the performance of each iteration of the analysis pipeline, each of which is uniquely defined by 1) the query generation method, 2) our choice of topic model, and 3) the specification of the relevance function.
+For each model, we are interested in both the performance of the model itself (e.g., how many of the returned publications are truly relevant) and operational improvement (e.g., comparison of the returned publications to the baseline set of publications listed on the MDL website).
+
+### Absolute Performance
+
+Our primary aim is to evaluate how effective each model is at returning the highest number of "potentially relevant results that are subsequently confirmed to be truly relevant.
+
+There are several metrics that we could use to evaluate the performance of an iteration of the analysis pipeline, each of which is uniquely defined by 1) the query generation method, 2) our choice of topic model, and 3) the specification of the relevance function.
 
 We considered several options, which are listed below.
 
 |  	| **Evaluation metric** 	| **Definition** 	| **Benefits** 	| **Other considerations** 	|
 |---	|:---:	|:---:	|:---:	|:---:	|
-| 1 	| Precision 	| xx 	| xx 	| xx 	|
-| 2 	| Recall 	|  xx 	| xx 	| xx 	|
-| 3 	| Percent unique 	| xx 	| xx 	| xx 	|
+| 1 	| Precision 	| TP / (TP + FP) 	| Helps explain hwo good this method is as "finding all existing papers 	| Hard to know the true/complete universe of positives 	|
+| 2 	| Recall 	|  TP / (TP + FN) 	| Helps explain how good this method is at "not being wrong"	| |
+| 3 	| Percent unique 	| % TP not caught manually 	| Helps explain improvement over baseline 	|  	|
+
+Foe a sample of 2323 paper-dataset pairs, we ran abstract text through the NLP4DEV API. The distribution of continuous relevance (e.g., percentage of text which refers to forced displacement) for those papers is shown below:
 
 
-```{r echo=FALSE}
-model_evaluation_table <- data.frame(`Evaluation Metric` = c("Precision","Recall","Percent Unique"), Definition = NA, Benefits = NA, `Other Considerations` = NA)
-# Calculate the figures for full text and abstract, and use them to populate the table
+```{r, echo = FALSE, out.width='100%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions'}
+knitr::include_graphics(here::here("figures/relevance_distribution.png"))
+```
 
+We divided these papers into quintiles; the cutoff points for these quintiles are shown below:
 
+| **0%**	| **20%** 	| **40%** 	| **60%* 	| **80%** 	| **100%** 	|
+|---	|:---:	|:---:	|:---:	|:---:	|:---:	|
+| 0.01 	| 0.04	| 0.11 	| 0.21 	| 0.39	| 0.79	|
 
-table <- kableExtra::kbl(
-    x = model_evaluation_table,
-    valign = "t",
-    caption.short = "Evaluation metric options"
-, full_width = F
-,format = "markdown"
-) %>% kable_styling("striped")
+We took a random sample of 10% of the papers in each quintile (233 in total). Of these, 129 papers-dataset pairs (consisting of 69 unique papers) went through manual full-text verification by a member of our team. Full text could not be found for four of the papers.
+
+```{r, echo = FALSE}
+
+manual_review_results <- data.frame(
+  Quintile = c(1:5),
+  `Not relevant` = c(8,6,7,1,1),
+  `Citing specific dataset` = c(0,0,1,0,0),
+  `Citing another dataset` = c(1,1,3,0,2),
+  `Referencing unspecified microdata source` = c(4,0,1,4,3),
+  `Referencing UNHCR data` = c(1,5,2,9,6)
+)
+
+table = kable(manual_review_results) %>%
+        kable_styling("striped", 
+                      full_width = F)
 
 table
 ```
 
-Our primary metric will be XXX based on the work of YYY.
+
+
+Papers in the top quintile (e.g., higher percentage of content referencing forced displacement) are less likely to be manually classified as completely irrelevant.
+
+
+### Operational Improvement
+
+The papers found and confirmed as relevant will be compared to the related publications listed under each dataset on the Microdata Library website. For many datasets, there are no or only a few related papers listed. However, a handful list more than one dozen related papers (see below).
+
+```{r, echo = FALSE, out.width='100%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions'}
+knitr::include_graphics(here::here("figures/related_publication_count.png"))
+```
+
+```{r echo=FALSE}
+# model_evaluation_table <- data.frame(`Evaluation Metric` = c("Precision","Recall","Percent Unique"), Definition = NA, Benefits = NA, `Other Considerations` = NA)
+# # Calculate the figures for full text and abstract, and use them to populate the table
+# 
+# 
+# table <- kableExtra::kbl(
+#     x = model_evaluation_table,
+#     valign = "t",
+#     caption.short = "Evaluation metric options"
+# , full_width = F
+# ,format = "markdown"
+# ) %>% kable_styling("striped")
+# 
+# table
+```

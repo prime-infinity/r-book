@@ -1,0 +1,13 @@
+name: mdl-case-study
+title: mdl-case-study
+username: ofatunde
+account: ofatunde
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11274217
+bundleId: 8274909
+url: https://ofatunde.shinyapps.io/mdl-case-study/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Bibliography.R|chapter3.R|codebase.html|codebase.Rmd|Context.html|Context.Rmd|contributors.html|contributors.md|contributors.Rmd|dataset114_query1.csv|dataset189_query1.csv|dataset189_query2.csv|dataset189_query3.csv|dataset189_query4.csv|Implementation-options.R|implementationoptions.Rmd|Introduction.html|Introduction.Rmd|Methods.html|Methods.Rmd|model_evaluation.R|modeloutput.Rmd|modelperformance.html|modelperformance.Rmd|Proposed-solution.html|Proposed-solution.Rmd|Querygeneration.html|Querygeneration.md|Querygeneration.Rmd|references.bib|Results.Rmd|Semanticsearch.html|Semanticsearch.Rmd|topicmodeling.html|topicmodeling.knit.md|topicmodeling.Rmd

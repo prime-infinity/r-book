@@ -1,3 +1,8 @@
+---
+output: html_document
+---
+
+
 # Methods
 
 This paper describes a methodology for systematically monitoring the use of UNHCR microdata. We develop a workflow for searching literature repositories with an initial focus on academic research, but with plans to include “grey literature” in the future. We take a three-step approach to producing a comprehensive and informative list of the papers that reference a particular dataset. 
@@ -18,3 +23,9 @@ Below we summarize the three primary methods that were used throughout this proc
 
 ## Tools
 We use two external tools: APIs powered by Semantic Scholar and NLP4Dev. We load corpuses from both and store them in [Google Cloud Storage](https://console.cloud.google.com/storage/browser/mdl-explorer-app;tab=objects?project=unhcr-microdata&prefix=&forceOnObjectsSortingFiltering=false).
+
+Below is an overview of the relationship between the inputs, tools and outputs.
+
+```{r, echo = FALSE, out.width='100%', fig.align='center', fig.cap='Relationship between abstract and full-body topic distributions', asis}
+knitr::include_graphics(here::here("figures/input_output_diagram.png"))
+```

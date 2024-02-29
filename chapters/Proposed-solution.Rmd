@@ -1,3 +1,7 @@
+---
+output: html_document
+---
+
 # Proposed Solution
 Our proposed solution is an automated process which generates outputs at two levels.
 

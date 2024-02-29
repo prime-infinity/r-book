@@ -1,6 +1,8 @@
 library(dplyr)
 library(ggplot2)
-coverage_heat_map <- function(dataset_number,query_type) {
+
+
+country_mention_heat_map <- function(dataset_number,query_type) {
   ## ----Install and load R packages-----------------
   #if (!require("tidyverse")) install.packages("tidyverse")
   #if (!require("rnaturalearth")) install.packages("rnaturalearth")
@@ -71,3 +73,105 @@ coverage_heat_map <- function(dataset_number,query_type) {
     ) +
     theme(plot.title = element_text(hjust = 0.5))
 }
+
+# Define the calculate_relevance_for_pair R function
+calculate_relevance_for_pair <- function(paper_id, 
+                                         dataset_number,
+                                         abstract_or_full_text, 
+                                         topic_39_percentage_abstract,
+                                         topic_39_percentage_full_text, 
+                                         jdc_tag_count_abstract, 
+                                         jdc_tag_count_full_text, 
+                                         majority_country_abstract, 
+                                         majority_country_full_text, 
+                                         relevance_threshold) {
+  # Use reticulate to call the calculate_relevance Python function
+  #result <- py$calculate_relevance(paper_id, dataset_number,topic_39_percentage, jdc_tag_count, majority_country)
+  
+  dataset_country <- metadata$nation[metadata$id == dataset_number][1]
+  dataset_name <- metadata$title[metadata$id == dataset_number][1]
+  
+  if(abstract_or_full_text == "full_text"){
+    if (topic_39_percentage_full_text > relevance_threshold & dataset_country == majority_country_full_text){
+      relevance = 1
+    } else if (topic_39_percentage_full_text > relevance_threshold & dataset_country != majority_country_full_text) {
+      relevance = 0.5
+    } else{
+      relevance = 0
+    }
+    
+    result <- data.frame(paper_id,dataset_number, dataset_name,relevance,topic_39_percentage_full_text,jdc_tag_count_full_text,majority_country_full_text)
+    colnames(result) <- c("Paper ID","Dataset Number","Dataset Name","Relevance","Forced Displacement Content", "JDC Tags Used", "Focal Country")
+    
+    
+  } else if (abstract_or_full_text == "abstract") {
+    if (topic_39_percentage_abstract > relevance_threshold & dataset_country == majority_country_abstract){
+      relevance = 1
+    } else if (topic_39_percentage_abstract > relevance_threshold & dataset_country != majority_country_abstract) {
+      relevance = 0.5
+    } else{
+      relevance = 0
+    }
+    
+    result <- data.frame(paper_id,dataset_number, dataset_name,relevance,topic_39_percentage_abstract,jdc_tag_count_abstract,majority_country_abstract)
+    colnames(result) <- c("Paper ID","Dataset Number","Dataset Name","Relevance","Forced Displacement Content", "JDC Tags Used", "Focal Country")
+    
+  }
+  
+    return(result)
+}
+
+#pull in list of related pubs from JDC website
+get_related_pubs <- function(dataset_number) {
+  url = URLencode(paste0("https://microdata.unhcr.org/index.php/catalog/",dataset_number,"/related-publications"))
+  page1 <<- xml2::read_html(url)
+  # extract all links
+  nodes <<- rvest::html_nodes(page1, "a")
+  links <<- rvest::html_attr(nodes,"href")
+  # extract first link of the search results
+  link <<- links[grepl("https://microdata.unhcr.org/index.php/citations",links)]
+  # clean it
+  link <<- sub("^/url\\?q\\=(.*?)\\&sa.*$","\\1", link)
+  
+  df <- data.frame(matrix(link))
+  colnames(df) <- "links"
+  return(df)
+}
+
+
+
+#for each related pub, pull the structured fields
+get_pub_fields <- function(dataset_number) {
+  related_pub_links <<- get_related_pubs(dataset_number)
+  
+  related_pub_table <<- data.frame()
+  
+  for(i in 1:nrow(related_pub_links)) {
+    address <- related_pub_links$links[i]
+    # extract all links
+    page_content <<- read_html(address)
+    tables <<- page_content %>% html_table(fill = TRUE)
+    first_table <<- tables[[1]]
+    
+    sub_tables <<-data.frame(ref_no = i) %>% 
+      cbind(first_table %>% 
+              column_to_rownames(var = "X1") %>% t) %>% 
+      `row.names<-`(., NULL) 
+    
+    related_pub_table <<- related_pub_table %>%
+      rbind.fill(sub_tables)
+    
+    
+    related_pub_table_v2 <<- related_pub_table %>%
+      rowwise %>%
+      mutate(Publication = str_extract(Type,"(?<= - ).*")
+             ,Type = str_trim(str_extract(Type,".*(?= - )"))
+      ) %>%
+      relocate(Publication, .after = Type)
+  }
+  
+  
+  return(related_pub_table_v2)
+}
+
+# see more at "C:/Users/ofatunde/Dropbox/World Bank JDC Fellowship/Project work/Microdata library/Microdata/unhcr-microdata/extraction_and_comparison_pipeline_v2.R"

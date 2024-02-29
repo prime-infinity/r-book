@@ -1,0 +1,1 @@
+The table below displays the number of search results produced by each query type for the selected dataset.

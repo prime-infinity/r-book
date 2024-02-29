@@ -1,0 +1,20 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Codebase
+
+|  	| **Purpose** 	| **Link** 	|
+|---	|:---:	|:---:	|
+| 1 	| Query generation	| [link] (https://github.com/ofatunde/mdl-explorer-app/blob/main/notebooks/Semantic_Scholar_NLP4DEV.ipynb)	| 
+| 2 	| Call to Semantic Scholar API	| [link] (https://www.dropbox.com/scl/fi/zpadhtoyobyqbkuif0zme/Scraping_Semantic_Scholar.ipynb?rlkey=tfrypkkiz7nksxfj9l2kcdpwn&dl=0)	| 
+| 3 	| Abstract vs full text availability 	| [link] (https://colab.research.google.com/drive/1sZsGAte_VbeT_R66Cv07sAWTzRLfVOmw?usp=sharing)	|
+| 4 	| Call to NLP4DEV API 	| [link] (https://colab.research.google.com/drive/1f-AFZ7oevwZgWCNpGnHHld5NPSqeLZrN?usp=sharing)	| 
+| 5 	| Relevance function	| [link] (https://www.dropbox.com/scl/fi/y4uita1x58fmlskkt96in/helper_functions.R?rlkey=ebi19y5dip1c0bum3nmhs8zxb&dl=0)	| 
+| 6 	| Model evaluation 	| 	|
+
+
