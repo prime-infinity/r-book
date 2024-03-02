@@ -21,6 +21,8 @@ source(here::here("chapters/casestudy_app.R"))
 source(here::here("chapters/helper_functions.R"))
 source(here::here("chapters/process_query_formulation.R"))
 source(here::here("chapters/data_prep.R"))
+source(here::here("auth.R"))
+
 
 # Define the UI for the Shiny app
 ui <- dashboardPage(

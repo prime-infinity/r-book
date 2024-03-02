@@ -1,5 +1,18 @@
 source(here::here("chapters/process_query_formulation.R"))
 source(here::here("chapters/helper_functions.R"))
+library(googledrive)
+
+# Function to read a file from Google Drive
+read_file_from_google_drive <- function(file, fun, ...) {
+  temp_file <- tempfile(fileext = ".txt")
+  googledrive::drive_download(
+    file = file,
+    path = temp_file
+  )
+  data <- fun(temp_file, ...)
+  data
+}
+
 # Load Python script with calculate_relevance function
 #source_python(here::here("chapters/relevance_calculator.py"))
 abstract_or_full_text <- read.csv(here::here("data/valid_abstract_and_body_text.csv"))
