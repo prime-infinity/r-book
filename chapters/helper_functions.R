@@ -1,6 +1,29 @@
 library(dplyr)
 library(ggplot2)
+library(googledrive)
 
+# Function to read a file from Google Drive
+read_file_from_google_drive <- function(file, fun, ...) {
+  temp_file <- tempfile(fileext = ".txt")
+  
+  # Download the specified file from Google Drive and save it to the temporary file
+  googledrive::drive_download(
+    file = file,
+    path = temp_file
+  )
+  
+  # Check if the file has a .RDS extension
+  if (tools::file_ext(file) == "RDS") {
+    # If the file is an RDS file, directly read it using readRDS
+    data <- readRDS(temp_file)
+  } else {
+    # If it's not an RDS file, read the contents using the specified function (fun)
+    data <- fun(temp_file, ...)
+  }
+  
+  # Return the data read from the file
+  data
+}
 
 country_mention_heat_map <- function(dataset_number,query_type) {
   ## ----Install and load R packages-----------------
@@ -18,8 +41,9 @@ country_mention_heat_map <- function(dataset_number,query_type) {
   #world <- rnaturalearth::ne_countries(scale="medium", returnclass="sf") %>%
   #filter(admin != "Antarctica")
   
-  world <- readRDS(here::here("data/world.RDS"))
-  window_coord_sf <- read.csv(here::here("data/window_coord_sf.csv"))
+  
+  world <- read_file_from_google_drive("world.RDS", readRDS)
+  window_coord_sf <- read_file_from_google_drive("window_coord_sf.csv", read.csv)
   
   ## ----Change World map projection-----------------
   # Mollweide proj

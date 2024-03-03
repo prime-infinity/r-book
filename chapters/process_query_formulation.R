@@ -1,8 +1,30 @@
 library(here)
 library(stringr)
 here::i_am("chapters/process_query_formulation.R")
+library(googledrive)
 
-metadata <- readxl::read_excel(here::here("data/overview_all_datasets_2022_categorized.xlsx"),sheet = "Categorized")
+read_file_from_google_drive <- function(file, fun, ...) {
+  temp_file <- tempfile(fileext = ".txt")
+  
+  googledrive::drive_download(
+    file = file,
+    path = temp_file
+  )
+  
+  # Check if the file has a .xlsx extension
+  if (tools::file_ext(file) == "xlsx") {
+    # If the file is an Excel file, read it using readxl::read_excel
+    data <- readxl::read_excel(temp_file, ...)
+  } else {
+    # If it's not an Excel file, read the contents using the specified function (fun)
+    data <- fun(temp_file, ...)
+  }
+  
+  # Return the data read from the file
+  data
+}
+
+metadata <- read_file_from_google_drive("overview_all_datasets_2022_categorized.xlsx", readxl::read_excel, sheet = "Categorized")
 
 dfq <- data.frame(fullname_shortcode = paste0(metadata$Category," ",metadata$abbreviation)
                   ,fau_short = sapply(metadata$authoring_entity,stringr::str_split_i,",",1) # Authoring entity short

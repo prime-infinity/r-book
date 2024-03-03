@@ -9,7 +9,7 @@ library(janitor)
 library(kableExtra)
 library(purrr)
 library(stringr)
-#source(here::here("chapters/data_prep.R"))
+source(here::here("chapters/data_prep.R"))
 library(googledrive)
 library(httr)
 
